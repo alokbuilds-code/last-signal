@@ -14,7 +14,7 @@
 - **Short Description**:
   > You wake up in 2097 inside an offline brutalist citadel. No memories. Just a dead terminal that whispers: *“WELCOME BACK.”* A zero-framework psychological sci-fi horror where your consciousness is the experiment—and the AI has watched you die 16 times before. 👁️⚡
 
----
+https://last-signal-two.vercel.app/
 
 ## 🩸 THE PREMISE
 
@@ -87,21 +87,6 @@ Built strictly with native browser standards:
 ❌ No React • ❌ No Three.js • ❌ No Phaser • ❌ No Tailwind • ❌ No External APIs • ❌ No Server
 
 ---
-
-## 🚀 QUICK START
-
-### Method 1: Instant Launch (No Server Needed)
-Simply **double-click** `index.html` in your file explorer. It runs offline directly via `file:///` in Chrome, Edge, Brave, or Firefox.
-
-### Method 2: Local HTTP Server
-```bash
-# Python 3
-python -m http.server 8080
-
-# Node.js
-npx serve .
-```
-Navigate to `http://localhost:8080` in your browser.
 
 ---
 
