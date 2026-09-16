@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ECHO//ZERO — THE LAST SIGNAL</title>
+  
+  <!-- Core Sci-Fi Mystery Stylesheets -->
+  <link rel="stylesheet" href="css/variables.css" />
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/game.css" />
+  <link rel="stylesheet" href="css/animations.css" />
+</head>
+<body>
+
+  <!-- Custom Cinematic Sci-Fi Reticle Cursor -->
+  <div id="custom-cursor">
+    <div id="custom-cursor-dot"></div>
+    <div id="custom-cursor-label">INTERACT</div>
+  </div>
+
+  <!-- CRT Scanlines & Vignette Overlays -->
+  <div class="crt-overlay"></div>
+  <div class="vignette-overlay"></div>
+
+  <!-- Master Game Viewport Container -->
+  <div id="game-container">
+
+    <!-- -----------------------------------------------------------------------
+         MINIMAL IN-GAME HUD
+         ----------------------------------------------------------------------- -->
+    <div class="hud-layer">
+      <!-- HUD Top Bar -->
+      <div class="hud-top-bar">
+        <div class="hud-brand-box">
+          <span class="hud-logo">ECHO//ZERO</span>
+          <button id="hud-sound-btn" class="hud-sound-btn" title="Toggle Synthesizer Soundscape">
+            <span class="sound-label">AUDIO: ON</span>
+          </button>
+        </div>
+
+        <div class="hud-status-beacon">
+          <span class="status-dot"></span>
+          <span id="hud-system-status-text">SYSTEM AUXILIARY: OFFLINE</span>
+        </div>
+
+        <div class="hud-location-tag" id="hud-location-tag">
+          FACILITY 07 // CENTRAL CORE
+        </div>
+      </div>
+
+      <!-- Overhead Camera Observation Alert Banner -->
+      <div id="camera-surveillance-banner">
+        <span>▲</span>
+        <span>CAMERA 01 ACTIVE // SUBJECT DETECTED: RECOGNITION FAILURE</span>
+      </div>
+
+      <!-- HUD Bottom Bar -->
+      <div class="hud-bottom-bar">
+        <div class="hud-objectives-box" id="hud-objectives-box">
+          <span style="font-family:var(--font-mono); font-size:9px; letter-spacing:0.15em; color:var(--text-muted);">CURRENT OBJECTIVE</span>
+          <span id="hud-objective-text" style="font-family:var(--font-mono); font-size:11px; color:var(--accent-cyan);">RESTORE AUXILIARY POWER GRID</span>
+        </div>
+
+        <button class="hud-inventory-btn" id="hud-inventory-btn">
+          <span>INVENTORY</span>
+          <span class="inventory-badge" id="hud-inventory-badge">0</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- -----------------------------------------------------------------------
+         ROOM 01: CENTRAL CORE
+         ----------------------------------------------------------------------- -->
+    <div id="room-core" class="room-viewport active unpowered">
+      <svg class="room-art-canvas" viewBox="0 0 1200 800" preserveAspectRatio="none">
+        <defs>
+          <radialGradient id="coreFloorGrad" cx="50%" cy="80%" r="70%">
+            <stop offset="0%" stop-color="#0F131A" />
+            <stop offset="100%" stop-color="#040507" />
+          </radialGradient>
+          <linearGradient id="bulkheadWallGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="#090B0E" />
+            <stop offset="100%" stop-color="#141922" />
+          </linearGradient>
+        </defs>
+
+        <!-- Room Chamber Walls & Concrete Perspective -->
+        <rect width="100%" height="100%" fill="#040507" />
+        
+        <!-- Brutalist Perspective Lines -->
+        <polygon points="120,80 1080,80 940,650 260,650" fill="url(#bulkheadWallGrad)" stroke="rgba(255,255,255,0.06)" stroke-width="2" />
+        <polygon points="260,650 940,650 1200,800 0,800" fill="url(#coreFloorGrad)" />
+        <line x1="0" y1="0" x2="120" y2="80" stroke="rgba(255,255,255,0.04)" stroke-width="2" />
+        <line x1="1200" y1="0" x2="1080" y2="80" stroke="rgba(255,255,255,0.04)" stroke-width="2" />
+        <line x1="0" y1="800" x2="260" y2="650" stroke="rgba(255,255,255,0.08)" stroke-width="2" />
+        <line x1="1200" y1="800" x2="940" y2="650" stroke="rgba(255,255,255,0.08)" stroke-width="2" />
+
+        <!-- Massive Hydraulic Bulkhead Door in the Center -->
+        <rect x="500" y="220" width="200" height="360" fill="#0A0D12" stroke="rgba(0, 229, 255, 0.25)" stroke-width="3" />
+        <line x1="600" y1="220" x2="600" y2="580" stroke="rgba(255,255,255,0.15)" stroke-width="2" />
+        <rect x="585" y="380" width="30" height="40" fill="#151A24" stroke="rgba(255,158,27,0.5)" stroke-width="1.5" />
+
+        <!-- Overhead Industrial Conduits & Pipes -->
+        <path d="M 120,140 L 500,140 L 500,220" stroke="rgba(255,255,255,0.08)" stroke-width="6" fill="none" />
+        <path d="M 1080,140 L 700,140 L 700,220" stroke="rgba(255,255,255,0.08)" stroke-width="6" fill="none" />
+
+        <!-- Power Bypass Terminal on the Left Wall -->
+        <rect x="200" y="340" width="90" height="150" fill="#0D1118" stroke="rgba(255,255,255,0.2)" stroke-width="2" />
+        <line x1="210" y1="360" x2="280" y2="360" stroke="rgba(0,229,255,0.4)" stroke-width="2" />
+
+        <!-- Broken Monitor on the Floor Column -->
+        <rect x="340" y="440" width="60" height="50" fill="#07090C" stroke="rgba(255,255,255,0.15)" stroke-width="1.5" />
+        <line x1="350" y1="460" x2="390" y2="460" stroke="rgba(255,43,67,0.5)" stroke-width="1" />
+
+        <!-- Maintenance Locker on the Right Wall -->
+        <rect x="890" y="320" width="80" height="220" fill="#0D1017" stroke="rgba(255,255,255,0.15)" stroke-width="2" />
+        <line x1="930" y1="320" x2="930" y2="540" stroke="rgba(255,255,255,0.1)" stroke-width="1" />
+        <circle cx="920" cy="430" r="3" fill="#FF9E1B" />
+
+        <!-- Overhead Surveillance Camera Mount -->
+        <circle cx="600" cy="110" r="14" fill="#151A24" stroke="rgba(255,255,255,0.2)" />
+        <polygon points="590,110 610,110 605,135 595,135" fill="#FF9E1B" opacity="0.8" />
+      </svg>
+
+      <!-- Interactive Hot-Zones: Central Core -->
+      <div class="hotzone" id="zone-core-power" style="left:21%; top:50%;" data-cursor-text="INSPECT CIRCUIT">
+        <div class="hotzone-reticle"><span class="hotzone-dot"></span></div>
+        <span class="hotzone-tag">AUXILIARY POWER PANEL</span>
+      </div>
+
+      <div class="hotzone" id="zone-core-monitor" style="left:31%; top:60%;" data-cursor-text="EXAMINE">
+        <div class="hotzone-reticle"><span class="hotzone-dot"></span></div>
+        <span class="hotzone-tag">FRACTURED CRT MONITOR</span>
+      </div>
+
+      <div class="hotzone" id="zone-core-terminal" style="left:40%; top:45%;" data-cursor-text="ACCESS GATEWAY">
+        <div class="hotzone-reticle"><span class="hotzone-dot"></span></div>
+        <span class="hotzone-tag">SECURITY GATEWAY CONSOLE</span>
+      </div>
+
+      <div class="hotzone" id="zone-core-locker" style="left:78%; top:52%;" data-cursor-text="SEARCH LOCKER">
+        <div class="hotzone-reticle"><span class="hotzone-dot"></span></div>
+        <span class="hotzone-tag">MAINTENANCE LOCKER 04</span>
+      </div>
+
+      <div class="hotzone" id="zone-core-door" style="left:50%; top:48%;" data-cursor-text="OPEN BULKHEAD">
+        <div class="hotzone-reticle"><span class="hotzone-dot"></span></div>
+        <span class="hotzone-tag">RESEARCH WING BULKHEAD</span>
+      </div>
+    </div>
+
+    <!-- -----------------------------------------------------------------------
+         ROOM 02: RESEARCH LAB
+         ----------------------------------------------------------------------- -->
+    <div id="room-lab" class="room-viewport">
+      <svg class="room-art-canvas" viewBox="0 0 1200 800" preserveAspectRatio="none">
+        <defs>
+          <linearGradient id="labWallGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="#0D121C" />
+            <stop offset="100%" stop-color="#06080D" />
+          </linearGradient>
+        </defs>
+
+        <rect width="100%" height="100%" fill="#040609" />
+        
+        <!-- Research Hall Grid Architecture -->
+        <polygon points="100,50 1100,50 980,680 220,680" fill="url(#labWallGrad)" stroke="rgba(0,229,255,0.12)" stroke-width="1.5" />
+        <line x1="220" y1="680" x2="0" y2="800" stroke="rgba(255,255,255,0.06)" stroke-width="2" />
+        <line x1="980" y1="680" x2="1200" y2="800" stroke="rgba(255,255,255,0.06)" stroke-width="2" />
+
+        <!-- Cryo-Reconstruction Pod 06 on the Left -->
+        <rect x="220" y="240" width="130" height="320" rx="10" fill="#0A0F17" stroke="rgba(0, 229, 255, 0.4)" stroke-width="2" />
+        <rect x="245" y="280" width="80" height="180" rx="6" fill="rgba(0, 229, 255, 0.08)" stroke="rgba(0, 229, 255, 0.2)" />
+        <ellipse cx="285" cy="340" rx="18" ry="24" fill="none" stroke="rgba(0, 229, 255, 0.3)" />
+
+        <!-- Central ECHO OS Mainframe Terminal Console -->
+        <rect x="490" y="280" width="220" height="260" fill="#0B0E14" stroke="rgba(0, 229, 255, 0.5)" stroke-width="2" />
+        <rect x="520" y="310" width="160" height="110" fill="#010306" stroke="rgba(0, 229, 255, 0.3)" />
+        <line x1="530" y1="330" x2="650" y2="330" stroke="rgba(0, 229, 255, 0.5)" stroke-width="1" />
+        <line x1="530" y1="350" x2="610" y2="350" stroke="rgba(0, 229, 255, 0.3)" stroke-width="1" />
+
+        <!-- Analytical Research Desk on Right -->
+        <polygon points="820,380 1020,380 1060,560 780,560" fill="#0E121A" stroke="rgba(255,255,255,0.12)" stroke-width="1.5" />
+        <!-- Desktop Monitor -->
+        <rect x="850" y="320" width="70" height="50" fill="#06080C" stroke="rgba(255,255,255,0.2)" />
+        <!-- Audio Tape Recorder Box -->
+        <rect x="940" y="395" width="40" height="24" fill="#151A24" stroke="rgba(255,43,67,0.5)" />
+        <circle cx="952" cy="407" r="4" fill="#FF2B43" />
+        <!-- Photograph on Desk Surface -->
+        <rect x="860" y="400" width="30" height="22" fill="#E1E7F0" transform="rotate(-6 860 400)" />
+      </svg>
+
+      <!-- Interactive Hot-Zones: Research Lab -->
+      <div class="hotzone" id="zone-lab-chamber" style="left:24%; top:45%;" data-cursor-text="INSPECT POD">
+        <div class="hotzone-reticle"><span class="hotzone-dot"></span></div>
+        <span class="hotzone-tag">RECONSTRUCTION POD 06</span>
+      </div>
+
+      <div class="hotzone" id="zone-lab-terminal" style="left:50%; top:50%;" data-cursor-text="ACCESS ECHO">
+        <div class="hotzone-reticle"><span class="hotzone-dot"></span></div>
+        <span class="hotzone-tag">ECHO OS TERMINAL</span>
+      </div>
+
+      <div class="hotzone" id="zone-lab-workstation" style="left:74%; top:42%;" data-cursor-text="EXAMINE LOGS">
+        <div class="hotzone-reticle"><span class="hotzone-dot"></span></div>
+        <span class="hotzone-tag">RESEARCH WORKSTATION</span>
+      </div>
+
+      <div class="hotzone" id="zone-lab-photo" style="left:72%; top:54%;" data-cursor-text="INSPECT PHOTO">
+        <div class="hotzone-reticle"><span class="hotzone-dot"></span></div>
+        <span class="hotzone-tag">ARCHIVAL PHOTOGRAPH</span>
+      </div>
+
+      <div class="hotzone" id="zone-lab-audio" style="left:81%; top:53%;" data-cursor-text="PLAY LOG">
+        <div class="hotzone-reticle"><span class="hotzone-dot"></span></div>
+        <span class="hotzone-tag">AUDIO RECORDER (LOG 01)</span>
+      </div>
+    </div>
+
+    <!-- -----------------------------------------------------------------------
+         OBJECT INSPECTION MODAL
+         ----------------------------------------------------------------------- -->
+    <div id="inspection-modal" class="game-modal">
+      <div class="modal-dialog">
+        <div class="modal-header">
+          <div>
+            <div class="modal-tag" id="inspect-tag">TELEMETRY</div>
+            <h3 class="modal-title" id="inspect-title">OBJECT NAME</h3>
+          </div>
+          <button class="modal-close-btn" id="inspection-modal-close">[ CLOSE ✕ ]</button>
+        </div>
+        <div class="modal-body" id="inspect-body"></div>
+        <div class="modal-actions">
+          <button class="btn-tactical" id="btn-modal-dismiss">DISMISS</button>
+          <button class="btn-tactical primary" id="btn-modal-action" style="display:none;">TAKE ITEM</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- -----------------------------------------------------------------------
+         POWER GRID CIRCUIT PUZZLE MODAL
+         ----------------------------------------------------------------------- -->
+    <div id="puzzle-modal" class="game-modal">
+      <div class="modal-dialog">
+        <div class="modal-header">
+          <div>
+            <div class="modal-tag">SYSTEM 01 // CIRCUIT BYPASS</div>
+            <h3 class="modal-title">AUXILIARY POWER ROUTING</h3>
+          </div>
+          <button class="modal-close-btn" id="puzzle-modal-close">[ CLOSE ✕ ]</button>
+        </div>
+        <div class="modal-body">
+          <p style="margin-bottom:12px; font-size:12px; color:var(--text-secondary);">
+            Route the primary electrical current from Generator [A] to the Central Core Capacitor [F]. Click nodes to switch active relay bridges.
+          </p>
+          <div class="circuit-schematic-board" id="circuit-board-container"></div>
+          <div id="circuit-diagnostic-msg" style="font-family:var(--font-mono); font-size:11px; color:var(--accent-amber); margin-top:10px;">
+            CIRCUIT INCOMPLETE // CORE CAPACITOR DE-ENERGIZED
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- -----------------------------------------------------------------------
+         ECHO OS TERMINAL MODAL
+         ----------------------------------------------------------------------- -->
+    <div id="terminal-modal" class="game-modal">
+      <div class="modal-dialog terminal-modal-dialog">
+        <div class="modal-header">
+          <div>
+            <div class="modal-tag">ECHO OS v4.22 // FACILITY 07 MAINFRAME</div>
+            <h3 class="modal-title" style="color:var(--accent-cyan);">CENTRAL CONSOLE</h3>
+          </div>
+          <button class="modal-close-btn" id="terminal-modal-close">[ EXIT TERMINAL ✕ ]</button>
+        </div>
+        
+        <div class="terminal-nav-menu">
+          <button class="terminal-nav-btn active" data-terminal-view="logs">> SYSTEM LOGS</button>
+          <button class="terminal-nav-btn" data-terminal-view="echo">> PROJECT ECHO</button>
+          <button class="terminal-nav-btn" data-terminal-view="cameras">> CAMERA NETWORK</button>
+        </div>
+
+        <div class="terminal-screen" id="terminal-screen-content"></div>
+      </div>
+    </div>
+
+    <!-- -----------------------------------------------------------------------
+         INVENTORY MODAL
+         ----------------------------------------------------------------------- -->
+    <div id="inventory-modal" class="game-modal">
+      <div class="modal-dialog">
+        <div class="modal-header">
+          <div>
+            <div class="modal-tag">TACTICAL STORAGE MATRIX</div>
+            <h3 class="modal-title">INVENTORY</h3>
+          </div>
+          <button class="modal-close-btn" id="inventory-modal-close">[ CLOSE ✕ ]</button>
+        </div>
+
+        <div class="inventory-grid" id="inventory-grid-container"></div>
+
+        <div id="item-inspector-view" style="display:none; border-top:1px solid var(--border-subtle); padding-top:16px;">
+          <div style="font-family:var(--font-mono); font-size:9px; color:var(--accent-cyan); letter-spacing:0.18em;" id="inspect-item-type">ACCESS TOKEN</div>
+          <h4 style="font-family:var(--font-display); font-size:18px; font-weight:bold; margin:4px 0 8px 0;" id="inspect-item-name">KEYCARD</h4>
+          <p style="font-size:12px; color:var(--text-secondary); line-height:1.6;" id="inspect-item-desc"></p>
+          <div style="margin-top:10px; font-family:var(--font-mono); font-size:11px; color:var(--accent-amber);" id="inspect-item-lore"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- -----------------------------------------------------------------------
+         OBJECTIVES MODAL
+         ----------------------------------------------------------------------- -->
+    <div id="objectives-modal" class="game-modal">
+      <div class="modal-dialog">
+        <div class="modal-header">
+          <div>
+            <div class="modal-tag">TACTICAL DIRECTIVE</div>
+            <h3 class="modal-title">OBJECTIVES</h3>
+          </div>
+          <button class="modal-close-btn" id="objectives-modal-close">[ CLOSE ✕ ]</button>
+        </div>
+        <ul id="objectives-modal-list" style="list-style:none; margin:10px 0;"></ul>
+      </div>
+    </div>
+
+    <!-- -----------------------------------------------------------------------
+         ACT 0: OPENING CINEMATIC STAGE
+         ----------------------------------------------------------------------- -->
+    <div id="opening-stage">
+      <div class="opening-meta-tag" id="opening-meta-tag">SYSTEM BOOT // 04:17:32 // MEMORY INTEGRITY: 17%</div>
+
+      <div class="opening-title-container">
+        <h1 class="opening-main-title" id="opening-main-title">ECHO//ZERO</h1>
+        <div class="opening-subtitle" id="opening-subtitle">THE LAST SIGNAL</div>
+        <div class="opening-voice-subtitle" id="opening-voice-sub"></div>
+      </div>
+
+      <div class="opening-facility-card" id="opening-facility-card">
+        <div class="facility-label-strip">
+          YEAR <span>2097</span> // FACILITY <span>07</span> // STATUS: <span>OFFLINE</span>
+        </div>
+        <div style="font-family:var(--font-mono); font-size:11px; color:var(--text-secondary); letter-spacing:0.2em;">
+          YOU ARE INSIDE. ACCESS LEVEL: UNKNOWN
+        </div>
+        <button class="btn-enter-facility" id="btn-enter-facility">
+          ENTER THE FACILITY →
+        </button>
+      </div>
+    </div>
+
+    <!-- -----------------------------------------------------------------------
+         CHAPTER 01 CLIMAX FINALE CARD
+         ----------------------------------------------------------------------- -->
+    <div id="climax-stage">
+      <div class="climax-card">
+        <div class="climax-subtext">ECHO//ZERO // SESSION 17 RECORDED</div>
+        <h2 class="climax-headline">CHAPTER 01<br />THE AWAKENING</h2>
+        <div class="climax-log">
+          <div>ORIGIN: UNKNOWN</div>
+          <div>SUBJECT: YOU</div>
+          <div style="color:var(--accent-alert); margin-top:8px;">"YOU ALWAYS DO THAT. WELCOME BACK."</div>
+        </div>
+        <div style="font-family:var(--font-mono); font-size:11px; color:var(--text-muted); letter-spacing:0.18em;">
+          TO BE CONTINUED IN CHAPTER 02
+        </div>
+        <button class="btn-tactical primary" id="btn-restart-cycle" style="margin-top:10px;">
+          RESTART CYCLE ↺
+        </button>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Unified Standalone Script (Supports both file:// and http:// execution) -->
+  <script src="js/echo-zero.js"></script>
+</body>
+</html>

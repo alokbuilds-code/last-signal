@@ -1,0 +1,62 @@
+/* ==========================================================================
+   ECHO//ZERO: THE LAST SIGNAL — Design Tokens & Variables
+   ========================================================================== */
+
+:root {
+  /* Brutalist Atmosphere Palette */
+  --bg-void: #030406;
+  --bg-facility: #07090D;
+  --bg-concrete: #0D1017;
+  --bg-steel: #151A24;
+  --bg-panel: rgba(13, 16, 23, 0.92);
+  --bg-terminal: #020305;
+  --bg-overlay: rgba(3, 4, 6, 0.88);
+
+  /* Tactical Accents */
+  --accent-cyan: #00E5FF;
+  --accent-cyan-dim: rgba(0, 229, 255, 0.15);
+  --accent-cyan-glow: 0 0 16px rgba(0, 229, 255, 0.35);
+
+  --accent-amber: #FF9E1B;
+  --accent-amber-dim: rgba(255, 158, 27, 0.15);
+  --accent-amber-glow: 0 0 16px rgba(255, 158, 27, 0.4);
+
+  --accent-alert: #FF2B43;
+  --accent-alert-glow: 0 0 20px rgba(255, 43, 67, 0.5);
+
+  --accent-green: #00FF88;
+
+  /* Typography Colors */
+  --text-pure: #FFFFFF;
+  --text-lead: #E1E7F0;
+  --text-secondary: #8996A8;
+  --text-muted: #495565;
+  --text-dark: #222B36;
+
+  /* Structural Dividers */
+  --border-subtle: rgba(255, 255, 255, 0.08);
+  --border-medium: rgba(255, 255, 255, 0.16);
+  --border-active: rgba(0, 229, 255, 0.45);
+  --border-amber: rgba(255, 158, 27, 0.45);
+
+  /* Typography Stacks */
+  --font-display: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-mono: "JetBrains Mono", "SF Mono", "Fira Code", "Courier New", Courier, monospace;
+
+  /* Easing & Timing */
+  --ease-cinematic: cubic-bezier(0.19, 1, 0.22, 1);
+  --ease-snap: cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-quick: 0.18s ease;
+  --transition-normal: 0.35s var(--ease-snap);
+  --transition-slow: 0.75s var(--ease-cinematic);
+
+  /* Layering Hierarchy */
+  --z-canvas: 1;
+  --z-environment: 2;
+  --z-hotzone: 5;
+  --z-hud: 20;
+  --z-modal: 50;
+  --z-terminal: 60;
+  --z-cinematic: 100;
+  --z-cursor: 9999;
+}
