@@ -1,4 +1,4 @@
-# 🕳️ ECHO//ZERO : THE LAST SIGNAL
+# 🕳️  THE LAST SIGNAL
 
 > *"If you are seeing this, the system has already failed."*
 
